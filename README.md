@@ -70,6 +70,9 @@
 * The main program runs `ArgParser` and creates a POD called `CommandRecipe`.
   Then, Command builds itself based on `CommandRecipe`. From this, we run its
   `execute` member, executing the command.
+* For tests, each class being tested has it's own xxxTest folder. The fixture
+  for that test has it's own .h and .ih file, and is otherwise a normal class.
+  The actual GoogleTest code is inside a test.cc file in that folder.
 
 ### Compiling
 * We compile the project with CMake.
@@ -79,7 +82,6 @@
   `<parser-name>Scanner`.
 
 ### TODO
-* Set up testing
 * Error reporting on parser(s)
 * Set up testing environment
 * Think about what to do for scanner output for things that don't match

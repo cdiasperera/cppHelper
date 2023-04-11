@@ -1,0 +1,5 @@
+#include "ArgParserTest.h"
+
+using namespace std;
+
+void parserTest(vector<string> input, CommandRecipe expected);

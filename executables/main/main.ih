@@ -1,3 +1,4 @@
+#include "../../lib/ArgParser/ArgParser.h"
 #include "../../lib/Config/Config.h"
 #include "../../lib/free_functions/free_functions.h"
 

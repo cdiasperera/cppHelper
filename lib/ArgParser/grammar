@@ -13,7 +13,15 @@ call:
 
 command:
                           // For generating folders
-  'g' opt_replace_list STRING INT INT INT
+  'g' gen_folder_flags_or_args
+;
+
+gen_folder_flags_or_args:
+  opt_replace_list gen_folder_args opt_replace_list
+;
+
+gen_folder_args:
+  STRING INT INT INT
 ;
 
 opt_replace_list:

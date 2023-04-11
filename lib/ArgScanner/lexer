@@ -1,8 +1,9 @@
+%interactive
 %class-name ArgScanner
 
 %x flag
 
-text                          [^-]+.*
+text                          [^-[:space:]]+[^[:space:]]*
 string                        \"{text}\"
 int                           [[:digit:]]+
 %%

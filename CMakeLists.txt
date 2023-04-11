@@ -34,7 +34,7 @@ FILE(GLOB EXEC_SOURCE
 
 # Test sources
 FILE(GLOB TEST_SOURCE
-        executables/test/flagTests.cc
+        executables/test/**/*.cc
         )
 
 # Prod Exec

@@ -2,13 +2,6 @@
 
 #include "ArgParser.h"
 
-#include <sstream>
-
-inline void ArgParser::error()
-{
-    std::cerr << "Syntax error\n";
-}
-
 inline int ArgParser::lex()
 {
     return d_scanner.lex();

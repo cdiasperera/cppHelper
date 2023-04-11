@@ -1,9 +1,5 @@
 #include "ArgParser.ih"
-ArgParser::ArgParser(int argc, char *argv[])
-{
-  stringstream argStream;
-  for (size_t argN = argc, idx = 0; idx != argN; ++idx)
-    argStream << argv[idx];
-
-  d_scanner = ArgScanner(argStream, cerr);
-}
+ArgParser::ArgParser(size_t argc, vector<string> const &argv)
+  : d_argIStream(makeArgIStream(argc, argv)),
+    d_scanner(d_argIStream)
+{}

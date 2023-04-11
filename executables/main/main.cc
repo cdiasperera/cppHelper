@@ -3,7 +3,7 @@
 int main(int argc, char *argv[])
 try
 {
-  Config::instance();
+  ArgParser(argc, vector<string>{argv, argv + argc});
 }
 catch (...)
 {

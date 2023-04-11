@@ -3,37 +3,51 @@
 #ifndef ArgParser_h_included
 #define ArgParser_h_included
 
-// $insert baseclass
 #include "ArgParserbase.h"
-// $insert scanner.h
 #include "../ArgScanner/ArgScanner.h"
+#include "../CommandRecipe/CommandRecipe.h"
 
+#include <vector>
+#include <sstream>
 
-
-class ArgParser: public ArgParserBase
+class ArgParser :
+  public ArgParserBase
 {
-    // $insert scannerobject
+    // args will be converted into a stream to be parsed
+    std::istringstream d_argIStream;
+
     ArgScanner d_scanner;
-        
-    public:
-        ArgParser() = default;
-        ArgParser(int argc, char *argv[]);                // 1.cc
-        int parse();
+    CommandRecipe d_cmdRecipe;
 
-    private:
-        void error();                   // called on (syntax) errors
-        int lex();                      // returns the next token from the
-                                        // lexical scanner. 
-        void print();                   // use, e.g., d_token, d_loc
-        void exceptionHandler(std::exception const &exc);
+  public:
+    ArgParser() = default;
+    ArgParser(size_t argc, std::vector<std::string> const &argv);        // 1.cc
+    int parse();
 
-    // support functions for parse():
-        void executeAction_(int ruleNr);
-        void errorRecovery_();
-        void nextCycle_();
-        void nextToken_();
-        void print_();
+    CommandRecipe const &getCmdRecipe() const;
+
+  private:
+    void error(char const *msg = "syntax error");
+    int lex();
+
+    std::istringstream makeArgIStream(
+      size_t argc, std::vector<std::string> const &argv
+    );
+    void print();
+    void exceptionHandler(std::exception const &exc);
+
+                                    // support functions for parse():
+    void executeAction_(int ruleNr);
+    void errorRecovery_();
+    void nextCycle_();
+    void nextToken_();
+    void print_();
 };
+
+inline CommandRecipe const &ArgParser::getCmdRecipe() const
+{
+  return d_cmdRecipe;
+}
 
 
 #endif
