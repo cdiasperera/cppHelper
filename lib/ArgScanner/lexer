@@ -1,0 +1,26 @@
+%class-name ArgScanner
+
+%x flag
+
+text                          [^-]+.*
+string                        \"{text}\"
+int                           [[:digit:]]+
+%%
+[[:space:]]                   // Skip whitespace
+{int}                         return Tokens::INT;
+{string}                      return Tokens::STRING;
+{text}                        return Tokens::TEXT;
+'-'                           {
+                                begin(StartCondition_::flag);
+                                return matched().front();
+                              }
+
+                              // We will now match a flag, which is shorter
+                              // than a string, so we need a mini scanner.
+<flag>
+{
+  (.|\n)                    {
+                              begin(StartCondition_::INITIAL);
+                              return matched().front();
+                            }
+}

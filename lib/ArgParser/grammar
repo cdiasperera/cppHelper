@@ -1,0 +1,23 @@
+%scanner    "../ArgScanner/ArgScanner.h"
+%token-path "../ArgScanner/tokens.h"
+
+%class-name         ArgParser
+%scanner-class-name ArgScanner
+
+%token TEXT STRING INT
+
+%%
+call:
+  TEXT '-' command
+;
+
+command:
+                          // For generating folders
+  'g' opt_replace_list STRING INT INT INT
+;
+
+opt_replace_list:
+  opt_replace_list '-' 'R' STRING STRING
+|
+  // empty
+;
