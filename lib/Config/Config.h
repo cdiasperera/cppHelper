@@ -4,6 +4,8 @@
 #include <filesystem>
 #include <unordered_map>
 
+// Singleton object containing configuration for program, obtained from a
+// configuration file.
 class Config
 {
   using fsPath = std::filesystem::path;
@@ -17,17 +19,14 @@ class Config
   fsPath d_exerciseTemplateFolder = d_configFolder/"exercise";
 
   public:
-    static Config &instance()
-    {
-      if (s_initd)
-        return s_singleton;
-
-      s_initd = true;
-      s_singleton = Config();
-      return s_singleton;
-    }
+    fsPath const &templateFilePath() const;
+    static Config &instance();
   private:
     Config() = default;
 };
+inline Config::fsPath const &Config::templateFilePath() const
+{
+  return d_exerciseTemplateFolder;
+}
 
 #endif

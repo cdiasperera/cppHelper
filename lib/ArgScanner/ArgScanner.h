@@ -3,11 +3,10 @@
 #ifndef ArgScanner_H_INCLUDED_
 #define ArgScanner_H_INCLUDED_
 
-// $insert baseclass_h
 #include "ArgScannerbase.h"
 
 
-// $insert classHead
+// Scanner for ArgParser
 class ArgScanner :
   public ArgScannerBase
 {

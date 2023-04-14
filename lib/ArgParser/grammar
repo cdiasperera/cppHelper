@@ -14,6 +14,9 @@ call:
 command:
                           // For generating folders
   'g' gen_folder_flags_or_args
+  {
+    // setCmdType('g');
+  }
 ;
 
 gen_folder_flags_or_args:
@@ -21,11 +24,26 @@ gen_folder_flags_or_args:
 ;
 
 gen_folder_args:
-  STRING INT INT INT
+  opt_string INT INT INT
+  {
+    // addArguments($2, $3, $4);
+  }
+;
+
+opt_string:
+  STRING
+  {
+    // addArguments($1);
+  }
+|
+  // empty
 ;
 
 opt_replace_list:
   opt_replace_list '-' 'R' STRING STRING
+  {
+    // addFlag('R', $4, $5);
+  }
 |
   // empty
 ;

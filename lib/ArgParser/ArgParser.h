@@ -10,9 +10,12 @@
 #include <vector>
 #include <sstream>
 
+// Parser for a command from the command line.
 class ArgParser :
   public ArgParserBase
 {
+    using StrIniList = std::initializer_list<std::string>;
+
     // args will be converted into a stream to be parsed
     std::istringstream d_argIStream;
 
@@ -33,6 +36,11 @@ class ArgParser :
     std::istringstream makeArgIStream(
       size_t argc, std::vector<std::string> const &argv
     );
+    void setCmdType(char flag);
+    void addArguments(StrIniList args);
+    void addFlag(char flag, StrIniList args);
+
+                                    // Pre-gen'd
     void print();
     void exceptionHandler(std::exception const &exc);
 

@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+// A POD for a command, consisting of the main command type, flags and the
+// main arguments.
 struct CommandRecipe
 {
   enum class CommandType

@@ -15,7 +15,14 @@ class ArgParserTest : public ::testing::Test
     // Test input
     vs genFolderInp = {"cppHelper", "-g", "\"/\"", "1", "1", "8"};
     // Expected test output
-    CommandRecipe genFolderExp = {};
+    CommandRecipe genFolderExp = {
+      CommandRecipe::CommandType::GEN_FOLDER,
+      {},
+      {"\"/\"", "1", "1", "8"}
+    };
+
+    vs genFolderInpNoLoc = {"cppHelper", "-g", "1", "1", "8"};
+    CommandRecipe genFolderExpNoLoc = {};
 
     vs genFolderInpOneReplace = {
       "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "\"/\"", "1", "1", "8"

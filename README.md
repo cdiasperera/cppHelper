@@ -15,17 +15,21 @@
 
 ## Commands
 
-### Folder Generation
+### Folder Generation (`-g`)
 * To generate the basic folder structure for an exercise, use the following 
   command:
   ```shell
   # General Pattern
-  cppHelper -g "<locToGenTo>" <set> <exStart> <exEnd>
+  cppHelper -g ["<locToGenTo>"] <set> <exStart> <exEnd>
   
   # Example, set 1, exercises 1 to 8, to put into folder "./Exercises"
   cppHelper -g "./Exercises" 1 1 8
   ```
+  By default, the exercise folder that the folder is generated in is the
+  current directory.
 
+* By default, if the folder / file already exists, it will not be created /
+  overwritten.
 * If you have common files that you have in every project, this command can copy
   these template files. To do this, put the file or folders you wish to copy in
   `$HOME/.cpphelper/exercise/`. They will automatically be copied.
@@ -83,6 +87,7 @@
 
 ### TODO
 * Error reporting on parser(s)
+* Decorate GenFolder parsing
 * Set up testing environment
 * Think about what to do for scanner output for things that don't match
 * Write parser for `replace.txt`

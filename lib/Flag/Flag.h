@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+// A flag and its associated arguments, as strings
 struct Flag
 {
   char flag;
