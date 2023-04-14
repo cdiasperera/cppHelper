@@ -5,16 +5,24 @@
 #include "../CommandRecipe/CommandRecipe.h"
 #include "../Config/Config.h"
 
+#include <gtest/gtest.h>
+
 // Command to generate folders
 class GenFolder : public Command
 {
+  friend class GenFolderTest;
+
   using ReplaceMap = std::unordered_map<std::string, std::string>;
 
   // (Relative) Argument positions in commands
   enum
   {
     TO_REPLACE_POS = 0,
-    REPLACE_WITH_POS
+    REPLACE_WITH_POS,
+    SET_ARG_POS = 0,
+    EXSTART_ARG_POS,
+    EXEND_ARG_POS,
+    NO_FOLDER_IN_ARGS_LEN = 3
   };
 
 
@@ -34,9 +42,11 @@ class GenFolder : public Command
   size_t d_exEnd;
   public:
     GenFolder(CommandRecipe recipe);
+    ~GenFolder() override = default;
     void execute() override;
   private:
-    void setMainArguments(CommandRecipe recipe);
+    void setMainArguments(CommandRecipe const &recipe);
+    bool noFolderInArgs(std::vector<std::string> const &args) const;
 };
 
 #endif

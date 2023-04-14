@@ -99,4 +99,5 @@
 * Write GenClass Command
 * Write GenMember Command
 * Write SendEmail Command
+* Write better names for variables (they are too long currently)
 * Write install script
