@@ -28,7 +28,7 @@ class GenFolder : public Command
   ReplaceMap d_replaceMap;
 
   // Main arguments when constructing the folder structure
-
+  std::string d_cpyInto;
   size_t d_set;
   size_t d_exStart;
   size_t d_exEnd;
@@ -36,7 +36,7 @@ class GenFolder : public Command
     GenFolder(CommandRecipe recipe);
     void execute() override;
   private:
-    void setMainArguments();
+    void setMainArguments(CommandRecipe recipe);
 };
 
 #endif

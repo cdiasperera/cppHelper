@@ -1,7 +1,7 @@
 #include "GenFolder.ih"
 GenFolder::GenFolder(CommandRecipe recipe)
 {
-  setMainArguments();
+  setMainArguments(recipe);
 
   d_replaceMap.insert(
     {TO_REPLACE_SET, std::to_string(d_set)}
