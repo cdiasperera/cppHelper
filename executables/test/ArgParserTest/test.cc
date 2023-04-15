@@ -2,7 +2,6 @@
 
 TEST_F(ArgParserTest, GenFolderTests)
 {
-
   parserTest(genFolderInp, genFolderExp);
   parserTest(genFolderInpNoLoc, genFolderExpNoLoc);
   parserTest(genFolderInpOneReplace, genFolderExpOneReplace);

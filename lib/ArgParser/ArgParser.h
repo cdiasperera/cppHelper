@@ -37,8 +37,8 @@ class ArgParser :
       size_t argc, std::vector<std::string> const &argv
     );
     void setCmdType(char flag);
-    void addArguments(StrIniList args);
-    void addFlag(char flag, StrIniList args);
+    void addArguments(StrIniList const &args);
+    void addFlag(char flag, StrIniList const &args);
 
                                     // Pre-gen'd
     void print();

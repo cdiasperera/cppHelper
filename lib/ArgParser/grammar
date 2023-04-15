@@ -6,16 +6,18 @@
 
 %token TEXT STRING INT
 
+%stype std::string
+
 %%
 call:
-  TEXT '-' command
+  text '-' command
 ;
 
 command:
                           // For generating folders
   'g' gen_folder_flags_or_args
   {
-    // setCmdType('g');
+    setCmdType('g');
   }
 ;
 
@@ -24,26 +26,47 @@ gen_folder_flags_or_args:
 ;
 
 gen_folder_args:
-  opt_string INT INT INT
+  opt_string int int int
   {
-    // addArguments($2, $3, $4);
+    addArguments({$2, $3, $4});
   }
 ;
 
 opt_string:
-  STRING
+  string
   {
-    // addArguments($1);
+    addArguments({$1});
   }
 |
   // empty
 ;
 
 opt_replace_list:
-  opt_replace_list '-' 'R' STRING STRING
+  opt_replace_list '-' 'R' string string
   {
-    // addFlag('R', $4, $5);
+    addFlag('R', {$4, $5});
   }
 |
   // empty
+;
+
+string:
+  STRING
+  {
+    $$ = d_scanner.matched();
+  }
+;
+
+int:
+  INT
+  {
+    $$ = d_scanner.matched();
+  }
+;
+
+text:
+  TEXT
+  {
+    $$ = d_scanner.matched();
+  }
 ;

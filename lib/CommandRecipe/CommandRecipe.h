@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 // A POD for a command, consisting of the main command type, flags and the
 // main arguments.
@@ -15,9 +16,13 @@ struct CommandRecipe
       GEN_FOLDER
   };
 
-  CommandType cmdType;
-  std::vector<Flag> flags;
-  std::vector<std::string> args;
+  static std::unordered_map<char, CommandType> s_chToCmdType;
+
+  CommandType d_cmdType;
+  std::vector<Flag> d_flags;
+  std::vector<std::string> d_args;
+
+  void setCmdType(char flag);
 };
 
 #endif

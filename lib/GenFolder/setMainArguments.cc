@@ -1,7 +1,7 @@
 #include "GenFolder.ih"
 void GenFolder::setMainArguments(CommandRecipe const &recipe)
 {
-  auto args = recipe.args;
+  auto args = recipe.d_args;
   if (noFolderInArgs(args))
     d_cpyInto = ".";
   else

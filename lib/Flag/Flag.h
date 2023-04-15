@@ -7,8 +7,10 @@
 // A flag and its associated arguments, as strings
 struct Flag
 {
-  char flag;
-  std::vector<std::string> args;
+  char d_flag;
+  std::vector<std::string> d_args;
+  public:
+    Flag(char flag, std::vector<std::string> const &args);
 };
 
 #endif

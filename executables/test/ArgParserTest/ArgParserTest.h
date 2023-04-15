@@ -13,36 +13,68 @@ class ArgParserTest : public ::testing::Test
     // General format of test data will be as follows:
 
     // Test input
-    vs genFolderInp = {"cppHelper", "-g", "\"/\"", "1", "1", "8"};
+    vs genFolderInp = {"cppHelper", "-g", "\"./\"", "1", "1", "8"};
     // Expected test output
     CommandRecipe genFolderExp = {
       CommandRecipe::CommandType::GEN_FOLDER,
       {},
-      {"\"/\"", "1", "1", "8"}
+      {"\"./\"", "1", "1", "8"}
     };
 
     vs genFolderInpNoLoc = {"cppHelper", "-g", "1", "1", "8"};
-    CommandRecipe genFolderExpNoLoc = {};
+    CommandRecipe genFolderExpNoLoc = {
+      CommandRecipe::CommandType::GEN_FOLDER,
+      {},
+      {"1", "1", "8"}
+    };
 
     vs genFolderInpOneReplace = {
       "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "\"/\"", "1", "1", "8"
     };
-    CommandRecipe genFolderExpOneReplace = {};
+    CommandRecipe genFolderExpOneReplace = {
+      CommandRecipe::CommandType::GEN_FOLDER,
+      {
+        {'R', {"a", "b"}}
+      },
+      {"\"/\"", "1", "1", "8"}
+    };
 
     vs genFolderInpMulReplace = {
-      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "-R", "\"b\"", "\"c\"", "\"/\"", "1", "1", "8"
+      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "-R", "\"b\"", "\"c\"",
+      "\"./\"", "1", "1", "8"
     };
-    CommandRecipe genFolderExpMulReplace = {};
+    CommandRecipe genFolderExpMulReplace = {
+      CommandRecipe::CommandType::GEN_FOLDER,
+      {
+        {'R', {"a", "b"}},
+        {'R', {"b", "c"}}
+      },
+      {"\"./\"", "1", "1", "8"}
+    };
 
     vs genFolderInpMulReplaceMix = {
-      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "-R", "\"b\"", "\"c\"", "\"/\"", "1", "1", "8",
-      "-R", "\"c\"", "\"d\""
+      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "-R", "\"b\"", "\"c\"",
+      "\"./\"", "1", "1", "8",  "-R", "\"c\"", "\"d\""
     };
-    CommandRecipe genFolderExpReplaceMix = {};
+    CommandRecipe genFolderExpReplaceMix = {
+      CommandRecipe::CommandType::GEN_FOLDER,
+      {
+        {'R', {"a", "b"}},
+        {'R', {"b", "c"}},
+        {'R', {"c", "d"}}
+      },
+      {"\"./\"", "1", "1", "8"}
+    };
 
-    bool compareCommandRecipes(CommandRecipe const &cmdRep1, CommandRecipe const &cmdRep2);
+    void parserTest(
+      std::vector<std::string> const &input, CommandRecipe const &expected
+    ) const ;
+
   private:
-    bool compareFlags(Flag const &flag1, Flag const &flag2);
+    static bool compareCommandRecipes(
+      CommandRecipe const &cmdRep1, CommandRecipe const &cmdRep2
+    );
+    static bool compareFlags(Flag const &flag1, Flag const &flag2);
 };
 
 #endif

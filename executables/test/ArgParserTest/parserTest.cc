@@ -1,13 +1,16 @@
 #include "ArgParserTest.ih"
 
-void parserTest(vector<string> input, CommandRecipe expected)
+void ArgParserTest::parserTest(
+  vector<string> const &input,
+  CommandRecipe const &expected
+) const
 {
-  ArgParser parser1{input.size(), input};
-  EXPECT_EQ(parser1.parse(), 0);
-//  EXPECT_TRUE(
-//    compareCommandRecipes(
-//      parser1.getCmdRecipe(),
-//      expected
-//    )
-//  );
+  ArgParser parser{input.size(), input};
+  EXPECT_EQ(parser.parse(), 0);
+  EXPECT_TRUE(
+    ArgParserTest::compareCommandRecipes(
+      parser.getCmdRecipe(),
+      expected
+    )
+  );
 }
