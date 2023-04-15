@@ -1,0 +1,30 @@
+
+gen_folder_flags_or_args:
+  opt_replace_list gen_folder_args opt_replace_list
+;
+
+gen_folder_args:
+  opt_root_folder int int int
+  {
+    addArguments({$2, $3, $4});
+  }
+;
+
+opt_root_folder:
+  string
+  {
+    addArguments({$1});
+  }
+|
+  // empty
+;
+
+opt_replace_list:
+  opt_replace_list '-' 'R' string string
+  {
+    addFlag('R', {$4, $5});
+  }
+|
+  // empty
+;
+

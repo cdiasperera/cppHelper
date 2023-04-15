@@ -1,0 +1,21 @@
+                            // Basic values from tokens
+string:
+  STRING
+  {
+    $$ = d_scanner.matched();
+  }
+;
+
+int:
+  INT
+  {
+    $$ = d_scanner.matched();
+  }
+;
+
+text:
+  TEXT
+  {
+    $$ = d_scanner.matched();
+  }
+;

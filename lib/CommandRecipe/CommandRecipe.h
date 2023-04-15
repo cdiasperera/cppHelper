@@ -13,7 +13,8 @@ struct CommandRecipe
 {
   enum class CommandType
   {
-      GEN_FOLDER
+      GEN_FOLDER,
+      GEN_ORDER
   };
 
   static std::unordered_map<char, CommandType> s_chToCmdType;

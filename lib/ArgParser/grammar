@@ -12,61 +12,17 @@
 call:
   text '-' command
 ;
-
+                                // Top level command production rule
 command:
-                          // For generating folders
   'g' gen_folder_flags_or_args
   {
     setCmdType('g');
   }
-;
-
-gen_folder_flags_or_args:
-  opt_replace_list gen_folder_args opt_replace_list
-;
-
-gen_folder_args:
-  opt_string int int int
-  {
-    addArguments({$2, $3, $4});
-  }
-;
-
-opt_string:
-  string
-  {
-    addArguments({$1});
-  }
 |
-  // empty
+  'o' order_folder exclude_list
 ;
 
-opt_replace_list:
-  opt_replace_list '-' 'R' string string
-  {
-    addFlag('R', {$4, $5});
-  }
-|
-  // empty
-;
-
-string:
-  STRING
-  {
-    $$ = d_scanner.matched();
-  }
-;
-
-int:
-  INT
-  {
-    $$ = d_scanner.matched();
-  }
-;
-
-text:
-  TEXT
-  {
-    $$ = d_scanner.matched();
-  }
-;
+%include inc/tokenValues
+                          // Grammar for each command
+%include inc/genFolderGrammar
+%include inc/genOrderGrammar
