@@ -66,6 +66,36 @@ class ArgParserTest : public ::testing::Test
       {"\"./\"", "1", "1", "8"}
     };
 
+    vs genOrderInp = {"cppHelper", "-o", "\"./\""};
+
+    CommandRecipe genOrderExp = {
+      CommandRecipe::CommandType::GEN_ORDER,
+      {},
+      {"\".\""}
+    };
+
+    vs genOrderInpWithExcl = {"cppHelper", "-o", "\"./\"", "1", "2", "3"};
+    CommandRecipe genOrderExpWithExcl = {
+      CommandRecipe::CommandType::GEN_ORDER,
+      {},
+      {"\".\"", "1", "2", "3"}
+    };
+
+
+    vs zipInp = {"cppHelper", "-z", "\"./\""};
+    CommandRecipe zipExp = {
+      CommandRecipe::CommandType::GEN_ORDER,
+      {},
+      {"\".\""}
+    };
+
+    vs zipInpWithExcl = {"cppHelper", "-z", "\"./\"", "1", "2", "3"};
+    CommandRecipe zipExpWithExcl = {
+      CommandRecipe::CommandType::GEN_ORDER,
+      {},
+      {"\".\"", "1", "2", "3"}
+    };
+
     void parserTest(
       std::vector<std::string> const &input, CommandRecipe const &expected
     ) const ;

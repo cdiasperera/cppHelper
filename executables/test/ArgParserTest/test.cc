@@ -8,3 +8,15 @@ TEST_F(ArgParserTest, GenFolderTests)
   parserTest(genFolderInpMulReplace, genFolderExpMulReplace);
   parserTest(genFolderInpMulReplaceMix, genFolderExpReplaceMix);
 }
+
+TEST_F(ArgParserTest, GenOrderTests)
+{
+  parserTest(genOrderInp, genOrderExp);
+  parserTest(genOrderInpWithExcl, genOrderExpWithExcl);
+}
+
+TEST_F(ArgParserTest, zipTests)
+{
+  parserTest(zipInp, zipExp);
+  parserTest(zipInpWithExcl, zipExpWithExcl);
+}

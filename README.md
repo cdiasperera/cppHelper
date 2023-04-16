@@ -30,9 +30,11 @@
 
 * By default, if the folder / file already exists, it will not be created /
   overwritten.
-* If you have common files that you have in every project, this command can copy
-  these template files. To do this, put the file or folders you wish to copy in
-  `$HOME/.cpphelper/exercise/`. They will automatically be copied.
+* If you have common files that you have in every exercise, this command can
+  copy these template files. To do this, put the file or folders you wish to
+  copy in `$HOME/.cpphelper/exercise/`. They will automatically be copied.
+* Make sure to fill out `$HOME/.cpphelper/metadata.txt` to create a
+  `metadata.txt` file as well.
 * Sometimes these files might contain strings that are based on the set number
   or the exercise number. Instead of the number put either of the following
   strings:
@@ -49,6 +51,14 @@
   ```
 
 ### `order.txt` Generation
+* To generate an `order.txt` for an exercise set, use the following command:
+  ```shell
+  # General Pattern
+  cppHelper -o <setToGenerateFor> {<exerciseToExclude>}
+  
+  # Example, generate for set in folder "./set1", except for exercise 4 and 5
+  cppHelper -o "./set1" 4 5
+  ```
 
 ### `.zip` Generation
 

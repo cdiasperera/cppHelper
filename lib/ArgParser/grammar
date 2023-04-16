@@ -19,10 +19,13 @@ command:
     setCmdType('g');
   }
 |
-  'o' order_folder exclude_list
+  'o' order_folder order_exclude_list
+|
+  'z' zip_folder zip_exclude_list
 ;
 
 %include inc/tokenValues
                           // Grammar for each command
 %include inc/genFolderGrammar
 %include inc/genOrderGrammar
+%include inc/zipGrammar

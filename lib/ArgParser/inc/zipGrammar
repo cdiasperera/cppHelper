@@ -1,12 +1,12 @@
-order_folder:
+zip_folder:
   string
   {
     addArguments({$1});
   }
 ;
 
-order_exclude_list:
-  order_exclude_list int
+zip_exclude_list:
+  zip_exclude_list int
 |
   // empty
 ;
