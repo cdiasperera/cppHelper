@@ -35,6 +35,8 @@
   copy in `$HOME/.cpphelper/exercise/`. They will automatically be copied.
 * Make sure to fill out `$HOME/.cpphelper/metadata.txt` to create a
   `metadata.txt` file as well.
+* The file that is placed at the top of every exercise (providing a summary for
+  it) is named `summary.txt`.
 * Sometimes these files might contain strings that are based on the set number
   or the exercise number. Instead of the number put either of the following
   strings:
