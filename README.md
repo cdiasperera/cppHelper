@@ -54,13 +54,21 @@
 * To generate an `order.txt` for an exercise set, use the following command:
   ```shell
   # General Pattern
-  cppHelper -o <setToGenerateFor> {<exerciseToExclude>}
+  cppHelper -o <setToGenerateFor> {<exerciseToExclude> <whitespace>}
   
   # Example, generate for set in folder "./set1", except for exercise 4 and 5
   cppHelper -o "./set1" 4 5
   ```
 
 ### `.zip` Generation
+* To generate an `setN.zip` for an exercise set, use the following command:
+  ```shell
+  # General Pattern
+  cppHelper -o <setToGenerateFor> {<exerciseToExclude> <whitespace>}
+  
+  # Example, generate for set in folder "./set1", except for exercise 4 and 5
+  cppHelper -o "./set1" 4 5
+  ```
 
 ### Class Generation
 

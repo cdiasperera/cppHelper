@@ -66,7 +66,7 @@ class ArgParserTest : public ::testing::Test
       {"\"./\"", "1", "1", "8"}
     };
 
-    vs genOrderInp = {"cppHelper", "-o", "\"./\""};
+    vs genOrderInp = {"cppHelper", "-o", "\".\""};
 
     CommandRecipe genOrderExp = {
       CommandRecipe::CommandType::GEN_ORDER,
@@ -74,7 +74,7 @@ class ArgParserTest : public ::testing::Test
       {"\".\""}
     };
 
-    vs genOrderInpWithExcl = {"cppHelper", "-o", "\"./\"", "1", "2", "3"};
+    vs genOrderInpWithExcl = {"cppHelper", "-o", "\".\"", "1", "2", "3"};
     CommandRecipe genOrderExpWithExcl = {
       CommandRecipe::CommandType::GEN_ORDER,
       {},
@@ -82,16 +82,16 @@ class ArgParserTest : public ::testing::Test
     };
 
 
-    vs zipInp = {"cppHelper", "-z", "\"./\""};
+    vs zipInp = {"cppHelper", "-z", "\".\""};
     CommandRecipe zipExp = {
-      CommandRecipe::CommandType::GEN_ORDER,
+      CommandRecipe::CommandType::ZIP_SET,
       {},
       {"\".\""}
     };
 
-    vs zipInpWithExcl = {"cppHelper", "-z", "\"./\"", "1", "2", "3"};
+    vs zipInpWithExcl = {"cppHelper", "-z", "\".\"", "1", "2", "3"};
     CommandRecipe zipExpWithExcl = {
-      CommandRecipe::CommandType::GEN_ORDER,
+      CommandRecipe::CommandType::ZIP_SET,
       {},
       {"\".\"", "1", "2", "3"}
     };
