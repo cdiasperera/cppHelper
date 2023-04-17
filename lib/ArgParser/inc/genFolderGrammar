@@ -1,4 +1,3 @@
-
 gen_folder_flags_or_args:
   opt_replace_list gen_folder_args opt_replace_list
 ;

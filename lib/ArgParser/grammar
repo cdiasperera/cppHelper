@@ -20,8 +20,14 @@ command:
   }
 |
   'o' order_folder order_exclude_list
+  {
+    setCmdType('o');
+  }
 |
   'z' zip_folder zip_exclude_list
+  {
+    setCmdType('z');
+  }
 ;
 
 %include inc/tokenValues

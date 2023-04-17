@@ -7,6 +7,9 @@ order_folder:
 
 order_exclude_list:
   order_exclude_list int
+  {
+    addArguments({$2});
+  }
 |
   // empty
 ;
