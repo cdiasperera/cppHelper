@@ -11,6 +11,9 @@ class RelationTest : public ::testing::Test
   protected:
     StringRel rel1;
     StringRel rel1TransClosure;
+    StringRel rel1RefClosure;
+
+    RelationTest();
 };
 
 #endif

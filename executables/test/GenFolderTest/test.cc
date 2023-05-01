@@ -2,10 +2,10 @@
 
 TEST_F(GenFolderTest, SetMainArgumentsTests)
 {
-  GenFolderTest::hasMainArgs(
+  EXPECT_TRUE(GenFolderTest::hasMainArgs(
     genFolderCmd, genFolderCmdExpArgs
-  );
-  GenFolderTest::hasMainArgs(
+  ));
+  EXPECT_TRUE(GenFolderTest::hasMainArgs(
     genFolderCmdDefaultLoc, genFolderCmdDefaultLocExpArgs
-  );
+  ));
 }
