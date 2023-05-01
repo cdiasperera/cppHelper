@@ -9,7 +9,8 @@
 template <typename Data>
 class Relation
 {
-  friend bool operator==(Relation const &r1, Relation const &r2);
+  template <typename D>
+  friend bool operator==(Relation<D> const &r1, Relation<D> const &r2);
 
   using AdjMatrix = std::unordered_map<Data, std::unordered_map<Data, bool>>;
   using Set = std::unordered_set<Data>;
@@ -58,12 +59,14 @@ void Relation<Data>::addToUniverse(const Data &elem)
 {
 
   if (not d_universe.contains(elem))
+  {
+    d_universe.insert(elem);
     for (auto const &existing : d_universe)
     {
       d_adjMatrix[existing][elem] = false;
       d_adjMatrix[elem][existing] = false;
     }
-  d_universe.insert(elem);
+  }
 }
 
 template <typename Data>
@@ -85,7 +88,7 @@ Relation<Data> Relation<Data>::transitiveClosure()
     for (auto const &i : d_universe)
       for (auto const &j : d_universe)
         closureMat[i][j] =
-          closureMat[i][j] or (closureMat[i][k] and closureMat[k][k]);
+          closureMat[i][j] or (closureMat[i][k] and closureMat[k][j]);
 
   return closure;
 }
@@ -105,13 +108,13 @@ Relation<Data> Relation<Data>::reflexiveClosure()
 template <typename Data>
 bool operator==(Relation<Data> const &r1, Relation<Data> const &r2)
 {
-  if (not r1.d_universe == r2.d_universe)
+  if (r1.d_universe != r2.d_universe)
     return false;
 
   auto const &universe = r1.d_universe;
   for (auto const &i : universe)
     for (auto const &j : universe)
-      if (r1.d_adjMatrix[i][j] != r2.d_adjMatrix[i][j])
+      if (r1.d_adjMatrix.at(i).at(j) != r2.d_adjMatrix.at(i).at(j))
         return false;
 
   return true;
