@@ -106,6 +106,7 @@
   `<parser-name>Scanner`.
 
 ### TODO
+* Improve testing on Relation (see TODO in test/RelationTest/test.cc)
 * Error reporting on parser(s)
 * Decorate GenFolder parsing
 * Set up testing environment
