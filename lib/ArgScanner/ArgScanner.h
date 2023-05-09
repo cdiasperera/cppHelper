@@ -10,6 +10,7 @@
 class ArgScanner :
   public ArgScannerBase
 {
+  std::string currString;
   public:
     explicit ArgScanner(std::istream &in = std::cin, std::ostream &out = std::cout,
                         bool keepCwd = true);

@@ -1,11 +1,4 @@
                             // Basic values from tokens
-string:
-  STRING
-  {
-    $$ = d_scanner.matched();
-  }
-;
-
 int:
   INT
   {

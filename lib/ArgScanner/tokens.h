@@ -7,7 +7,6 @@ struct Tokens
     enum Tokens_
     {
         TEXT = 257,
-        STRING,
         INT,
     };
 

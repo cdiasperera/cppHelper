@@ -33,9 +33,12 @@ class ArgParser :
     void error(char const *msg = "syntax error");
     int lex();
 
+    // Make an istream from a string vector
     std::istringstream makeArgIStream(
       size_t argc, std::vector<std::string> const &argv
     );
+    // Add quotes to a string with spaces, for the lexer to detect
+    std::vector<std::string> addQuotes(std::vector<std::string> const &argv);
     void setCmdType(char flag);
     void addArguments(StrIniList const &args);
     void addFlag(char flag, StrIniList const &args);

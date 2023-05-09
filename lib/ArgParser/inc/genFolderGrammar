@@ -10,7 +10,7 @@ gen_folder_args:
 ;
 
 opt_root_folder:
-  string
+  text
   {
     addArguments({$1});
   }
@@ -19,7 +19,7 @@ opt_root_folder:
 ;
 
 opt_replace_list:
-  opt_replace_list '-' 'R' string string
+  opt_replace_list '-' 'R' text text
   {
     addFlag('R', {$4, $5});
   }

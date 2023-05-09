@@ -20,10 +20,10 @@
   command:
   ```shell
   # General Pattern
-  cppHelper -g ["<locToGenTo>"] <set> <exStart> <exEnd>
+  cppHelper -g [<locToGenTo>] <set> <exStart> <exEnd>
   
-  # Example, set 1, exercises 1 to 8, to put into folder "./Exercises"
-  cppHelper -g "./Exercises" 1 1 8
+  # Example, set 1, exercises 1 to 8, to put into folder ./Exercises
+  cppHelper -g ./Exercises 1 1 8
   ```
   By default, the exercise folder that the folder is generated in is the
   current directory.
@@ -49,7 +49,7 @@
   files with another string (say `replaceWith`), you can use the `-R` augment,
   followed by the strings:
   ```shell
-  cppHelper -g -R "toReplace" "replaceWith" "./Exercises" 1 1 8
+  cppHelper -g -R toReplace replaceWith ./Exercises 1 1 8
   ```
 
 ### `order.txt` Generation
@@ -59,7 +59,7 @@
   cppHelper -o <setToGenerateFor> {<exerciseToExclude> <whitespace>}
   
   # Example, generate for set in folder "./set1", except for exercise 4 and 5
-  cppHelper -o "./set1" 4 5
+  cppHelper -o ./set1 4 5
   ```
 
 ### `.zip` Generation
@@ -68,8 +68,8 @@
   # General Pattern
   cppHelper -o <setToGenerateFor> {<exerciseToExclude> <whitespace>}
   
-  # Example, generate for set in folder "./set1", except for exercise 4 and 5
-  cppHelper -o "./set1" 4 5
+  # Example, generate for set in folder ./set1, except for exercise 4 and 5
+  cppHelper -o ./set1 4 5
   ```
 
 ### Class Generation

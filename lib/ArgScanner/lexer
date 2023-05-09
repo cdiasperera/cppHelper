@@ -1,16 +1,17 @@
 %interactive
 %class-name ArgScanner
 
-%x flag
-
-text                          [^-[:space:]]+[^[:space:]]*
-string                        \"{text}\"
+%x flag string
+text                          [^\"\-[:space:]]+[^[:space:]]*
 int                           [[:digit:]]+
 %%
 [[:space:]]                   // Skip whitespace
 {int}                         return Tokens::INT;
-{string}                      return Tokens::STRING;
 {text}                        return Tokens::TEXT;
+\"                            {
+                                currString.clear();
+                                begin(StartCondition_::string);
+                              }
 '-'                           {
                                 begin(StartCondition_::flag);
                                 return matched().front();
@@ -23,5 +24,17 @@ int                           [[:digit:]]+
   (.|\n)                    {
                               begin(StartCondition_::INITIAL);
                               return matched().front();
+                            }
+}
+
+<string>
+{
+  \"                        {
+                              setMatched(currString);
+                              begin(StartCondition_::INITIAL);
+                              return Tokens::TEXT;
+                            }
+  .                         {
+                              currString += matched()[0];
                             }
 }

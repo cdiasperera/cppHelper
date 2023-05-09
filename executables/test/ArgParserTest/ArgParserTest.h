@@ -13,12 +13,19 @@ class ArgParserTest : public ::testing::Test
     // General format of test data will be as follows:
 
     // Test input
-    vs genFolderInp = {"cppHelper", "-g", "\"./\"", "1", "1", "8"};
+    vs spaceInTextInp = {"cppHelper", "-g", "This is a folder", "1", "1", "8"};
     // Expected test output
+    CommandRecipe spaceInTextExp = {
+      CommandRecipe::CommandType::GEN_FOLDER,
+      {},
+      {"This is a folder", "1", "1", "8"}
+    };
+
+    vs genFolderInp = {"cppHelper", "-g", "./", "1", "1", "8"};
     CommandRecipe genFolderExp = {
       CommandRecipe::CommandType::GEN_FOLDER,
       {},
-      {"\"./\"", "1", "1", "8"}
+      {"./", "1", "1", "8"}
     };
 
     vs genFolderInpNoLoc = {"cppHelper", "-g", "1", "1", "8"};
@@ -29,19 +36,19 @@ class ArgParserTest : public ::testing::Test
     };
 
     vs genFolderInpOneReplace = {
-      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "\"/\"", "1", "1", "8"
+      "cppHelper", "-g", "-R", "a", "b", "/", "1", "1", "8"
     };
     CommandRecipe genFolderExpOneReplace = {
       CommandRecipe::CommandType::GEN_FOLDER,
       {
         {'R', {"a", "b"}}
       },
-      {"\"/\"", "1", "1", "8"}
+      {"/", "1", "1", "8"}
     };
 
     vs genFolderInpMulReplace = {
-      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "-R", "\"b\"", "\"c\"",
-      "\"./\"", "1", "1", "8"
+      "cppHelper", "-g", "-R", "a", "b", "-R", "b", "c",
+      "./", "1", "1", "8"
     };
     CommandRecipe genFolderExpMulReplace = {
       CommandRecipe::CommandType::GEN_FOLDER,
@@ -49,12 +56,12 @@ class ArgParserTest : public ::testing::Test
         {'R', {"a", "b"}},
         {'R', {"b", "c"}}
       },
-      {"\"./\"", "1", "1", "8"}
+      {"./", "1", "1", "8"}
     };
 
     vs genFolderInpMulReplaceMix = {
-      "cppHelper", "-g", "-R", "\"a\"", "\"b\"", "-R", "\"b\"", "\"c\"",
-      "\"./\"", "1", "1", "8",  "-R", "\"c\"", "\"d\""
+      "cppHelper", "-g", "-R", "a", "b", "-R", "b", "c",
+      "./", "1", "1", "8",  "-R", "c", "d"
     };
     CommandRecipe genFolderExpReplaceMix = {
       CommandRecipe::CommandType::GEN_FOLDER,
@@ -63,37 +70,37 @@ class ArgParserTest : public ::testing::Test
         {'R', {"b", "c"}},
         {'R', {"c", "d"}}
       },
-      {"\"./\"", "1", "1", "8"}
+      {"./", "1", "1", "8"}
     };
 
-    vs genOrderInp = {"cppHelper", "-o", "\".\""};
+    vs genOrderInp = {"/mnt/c/Users/cdper/repos/cppHelper/cmake-build-debug/playground", "-o", "."};
 
     CommandRecipe genOrderExp = {
       CommandRecipe::CommandType::GEN_ORDER,
       {},
-      {"\".\""}
+      {"."}
     };
 
-    vs genOrderInpWithExcl = {"cppHelper", "-o", "\".\"", "1", "2", "3"};
+    vs genOrderInpWithExcl = {"cppHelper", "-o", ".", "1", "2", "3"};
     CommandRecipe genOrderExpWithExcl = {
       CommandRecipe::CommandType::GEN_ORDER,
       {},
-      {"\".\"", "1", "2", "3"}
+      {".", "1", "2", "3"}
     };
 
 
-    vs zipInp = {"cppHelper", "-z", "\".\""};
+    vs zipInp = {"cppHelper", "-z", "."};
     CommandRecipe zipExp = {
       CommandRecipe::CommandType::ZIP_SET,
       {},
-      {"\".\""}
+      {"."}
     };
 
-    vs zipInpWithExcl = {"cppHelper", "-z", "\".\"", "1", "2", "3"};
+    vs zipInpWithExcl = {"cppHelper", "-z", ".", "1", "2", "3"};
     CommandRecipe zipExpWithExcl = {
       CommandRecipe::CommandType::ZIP_SET,
       {},
-      {"\".\"", "1", "2", "3"}
+      {".", "1", "2", "3"}
     };
 
     void parserTest(

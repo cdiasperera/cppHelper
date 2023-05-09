@@ -4,7 +4,7 @@
 %class-name         ArgParser
 %scanner-class-name ArgScanner
 
-%token TEXT STRING INT
+%token TEXT INT
 
 %stype std::string
 

@@ -1,5 +1,5 @@
 order_folder:
-  string
+  text
   {
     addArguments({$1});
   }

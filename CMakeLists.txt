@@ -37,8 +37,15 @@ FILE(GLOB TEST_SOURCE
         executables/test/**/*.cc
         )
 
+FILE(GLOB PLAYGROUND_SOURCE
+        executables/playground/main.cc
+        )
+
 # Prod Exec
 add_executable(cppHelper ${COMMON_SOURCES} ${EXEC_SOURCE})
+
+# Playground Exec
+add_executable(playground ${COMMON_SOURCES} ${PLAYGROUND_SOURCE})
 
 # Test execs
 add_executable(cppHelperTest ${COMMON_SOURCES} ${TEST_SOURCE})

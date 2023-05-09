@@ -1,5 +1,10 @@
 #include "ArgParserTest.ih"
 
+TEST_F(ArgParserTest, SpaceInTextTest)
+{
+  parserTest(spaceInTextInp, spaceInTextExp);
+}
+
 TEST_F(ArgParserTest, GenFolderTests)
 {
   parserTest(genFolderInp, genFolderExp);

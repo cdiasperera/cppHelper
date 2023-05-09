@@ -1,5 +1,5 @@
 zip_folder:
-  string
+  text
   {
     addArguments({$1});
   }
