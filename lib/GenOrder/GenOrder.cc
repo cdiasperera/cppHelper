@@ -1,10 +1,19 @@
 #include "GenOrder.ih"
 
 GenOrder::GenOrder(CommandRecipe recipe)
-  : d_setFolder(recipe.d_args[SET_FOLDER_ARG_POS]),
-    d_exExclList
-    {
-      recipe.d_args.begin() + IGNORE_FOLDERS_ARG_STAR,
-      recipe.d_args.end()
-    }
-{}
+  : d_setFolder(recipe.d_args[SET_FLDR_ARG_POS])
+{
+  // Add args to d_exclList, except for single digit exercises, but it in double
+  // digit format
+  auto args = recipe.d_args;
+  for (auto it = args.begin() + IGNORE_ARG_START; it != args.end(); ++it)
+  {
+    string toInsert = *it;
+    size_t exNo = stoul(toInsert);
+
+    if (exNo <= 9)
+      toInsert.insert(0, "0");
+
+    d_exExclList.push_back(toInsert);
+  }
+}

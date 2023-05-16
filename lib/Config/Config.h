@@ -32,7 +32,7 @@ class Config
   path d_prioFile = d_configFolder / "prio.txt";
 
             // (Relative) Paths to ignore, when generating order.txt
-  vp d_notInOrder;
+  vp d_exclFromOrder;
             // Extension / filename priorities for order.txt
             // Filenames are prefixed by FILE_NAME_PREFIX to differentiate it
             // from extensions (as some files might start with a '.')
@@ -46,7 +46,7 @@ class Config
     path const &getTemplateFolderPath() const;
 
     // Get the files that should be excluded from the order.txt
-    vp const &getNotInOrder() const;
+    vp const &getExclFromOrder() const;
     // Returns true if p1 has higher priority than p2 in the order.txt
     bool higherPriority(path const &p1, path const &p2) const;
   private:
@@ -82,9 +82,9 @@ inline Config::path const &Config::getTemplateFolderPath() const
   return d_exerciseTemplateFolder;
 }
 
-inline Config::vp const &Config::getNotInOrder() const
+inline Config::vp const &Config::getExclFromOrder() const
 {
-  return d_notInOrder;
+  return d_exclFromOrder;
 }
 
 inline bool Config::isFile(std::string const &prioFileLine) const

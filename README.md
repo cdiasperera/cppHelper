@@ -157,23 +157,12 @@
   `<parser-name>Scanner`.
 
 ### TODO
-* Summary file name in readme
-* Write comments
-* Check const correctness on function signatures
-* Check const correctness on variables
-* Improve testing on Relation (see TODO in test/RelationTest/test.cc)
+* Test GenOrder on excluding folders / exercises with single digit names
 * Error reporting on parser(s)
-* Decorate GenFolder parsing
-* Set up testing environment
-* Think about what to do for scanner output for things that don't match
 * Write parser for `replace.txt`
 * Write Command
 * Write GenFolder Command
-* Replace `<set-no>` and `<ex-no>` during copying of files.
-* Write GenOrders Command 
 * Write GenZip Command 
 * Write GenClass Command
 * Write GenMember Command
-* Write SendEmail Command
-* Write better names for variables (they are too long currently)
 * Write install script
