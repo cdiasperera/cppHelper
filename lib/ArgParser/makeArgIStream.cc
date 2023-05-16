@@ -2,7 +2,7 @@
 
 istringstream ArgParser::makeArgIStream(
   size_t argc, vector<string> const &argv
-)
+) const
 {
 
   string argString;

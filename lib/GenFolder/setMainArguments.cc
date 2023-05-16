@@ -6,7 +6,7 @@ void GenFolder::setMainArguments(CommandRecipe const &recipe)
     d_cpyInto = ".";
   else
   {
-    d_cpyInto = args.front();
+    d_cpyInto = path(args.front());
     args.erase(args.begin());
   }
 

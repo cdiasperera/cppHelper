@@ -19,7 +19,7 @@ include_directories(external/googletest/googlemock/include)
 
 # Compiler flags
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_FLAGS "-g -Wall -Werror")
+set(CMAKE_CXX_FLAGS "-g -Wall")
 
 # Sources to be used in executable and/or tests, i.e: non main containing
 # sources

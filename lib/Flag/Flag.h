@@ -9,8 +9,7 @@ struct Flag
 {
   char d_flag;
   std::vector<std::string> d_args;
-  public:
-    Flag(char flag, std::vector<std::string> const &args);
+  Flag(char flag, std::vector<std::string> const &args);
 };
 
 #endif

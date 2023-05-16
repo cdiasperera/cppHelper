@@ -30,13 +30,13 @@ class ArgParser :
     CommandRecipe const &getCmdRecipe() const;
 
   private:
-    void error(char const *msg = "syntax error");
+    void error(char const *msg = "syntax error") const;
     int lex();
 
     // Make an istream from a string vector
     std::istringstream makeArgIStream(
       size_t argc, std::vector<std::string> const &argv
-    );
+    ) const;
     // Add quotes to a string with spaces, for the lexer to detect
     std::vector<std::string> addQuotes(std::vector<std::string> const &argv);
     void setCmdType(char flag);

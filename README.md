@@ -60,17 +60,68 @@
   
   # Example, generate for set in folder "./set1", except for exercise 4 and 5
   cppHelper -o ./set1 4 5
+  
+* **Note that you will need to modify the order of the files in the `order.txt`
+  in some cases, as Frank / Jurjen / TAs expect a certain ordering of files.**
+  We try our best to make the `order.txt` as nice as possible, but it won't be
+  perfect.
+  
+* Often enough, there will be folders / files you wish to automatically exclude
+  from the `order.txt`, such as build folders / files. To ignore these folders
+  / files, add them to `.cpphelpder/ignore.txt`.
+
+  For example, if every exercise (perhaps) contains a folder named
+  `cmake-build-debug/` or `CMakeLists.txt` that you never want to include,
+  you can add `cmake-build-debug/`  and `CMakeLists.txt` to the `ignore.txt`
+  file.
+  
+  Note, that the path names are relative from the exercise directory.
+* Lastly, you often want to order the files in the `order.txt` in a specific
+  order. For example, you often want the `.h` file for a class to be above the
+  `.cc` files for that class. Furthermore, you need a text file explaining the
+  exercise at the top of the `order.txt` (which we call `summary.txt`) 
+
+  It's a difficult task to do perfectly, and an ideal solution would involve
+  parsing a subset of C++ to determine which classes a file is associated with.
+
+  To reduce the amount of "fixing" you have to do on the generated `order.txt`,
+  we will do some basic ordering on file extensions / file names. This is
+  configurable in the `.cpphelper/prio.txt` file (which you can create). File
+  names / extensions that appear earlier in this file will be placed higher
+  in priority in the final `order.txt`. 
+
+  Each line contains a file name / extension. An extension must start with `.`
+  and a filename must be prepended with `$`.
+
+  This ordering is conducted per folder in the exercise, which each folder's
+  files being separated in the generated `order.txt`.
+
+  The default ordering is:
+  ```
+  summary.txt
+  grammar
+  lexer
+  .h
+  .ih
+  .f
+  .hi
+  .cc
+  .cpp
   ```
 
 ### `.zip` Generation
 * To generate an `setN.zip` for an exercise set, use the following command:
   ```shell
   # General Pattern
-  cppHelper -o <setToGenerateFor> {<exerciseToExclude> <whitespace>}
+  cppHelper -z <setToGenerateFor> {<exerciseToExclude> <whitespace>}
   
   # Example, generate for set in folder ./set1, except for exercise 4 and 5
-  cppHelper -o ./set1 4 5
+  cppHelper -z ./set1 4 5
   ```
+  
+* Note that the files added to the zip are based on the `order.txt` files inside
+  each exercise folder. If no `order.txt` exists in a folder, that exercise will
+  not be added.
 
 ### Class Generation
 
@@ -106,6 +157,10 @@
   `<parser-name>Scanner`.
 
 ### TODO
+* Summary file name in readme
+* Write comments
+* Check const correctness on function signatures
+* Check const correctness on variables
 * Improve testing on Relation (see TODO in test/RelationTest/test.cc)
 * Error reporting on parser(s)
 * Decorate GenFolder parsing

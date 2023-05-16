@@ -18,13 +18,13 @@ struct CommandRecipe
       ZIP_SET
   };
 
-  static std::unordered_map<char, CommandType> s_chToCmdType;
-
-  CommandType d_cmdType;
   std::vector<Flag> d_flags;
   std::vector<std::string> d_args;
 
   void setCmdType(char flag);
+  private:
+    static std::unordered_map<char, CommandType> s_chToCmdType;
+    CommandType d_cmdType;
 };
 
 #endif
