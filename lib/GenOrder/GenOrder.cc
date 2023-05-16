@@ -11,7 +11,7 @@ GenOrder::GenOrder(CommandRecipe recipe)
     string toInsert = *it;
     size_t exNo = stoul(toInsert);
 
-    if (exNo <= 9)
+    if (exNo <= 9 && toInsert.size() < 2)
       toInsert.insert(0, "0");
 
     d_exExclList.push_back(toInsert);

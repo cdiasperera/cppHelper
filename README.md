@@ -157,12 +157,13 @@
   `<parser-name>Scanner`.
 
 ### TODO
-* Test GenOrder on excluding folders / exercises with single digit names
 * Error reporting on parser(s)
+* Verbose flag for all commands
 * Write parser for `replace.txt`
 * Write Command
 * Write GenFolder Command
 * Write GenZip Command 
 * Write GenClass Command
+* Write GenMember Command
 * Write GenMember Command
 * Write install script
