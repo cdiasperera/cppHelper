@@ -24,29 +24,56 @@ class Config
             // Parent folder of configuration settings
   path d_configFolder = path(getenv("HOME"))/".cpphelper";
 
-            // Location of configuration settings
+            // Location of exercise template folder
   path d_exerciseTemplateFolder = d_configFolder/"exercise";
-  path d_ignoreForOrderFile = d_configFolder/"ignore.txt";
+            // Location of files to not include in order.txt
+  path d_ignoreLoc = d_configFolder / "ignore.txt";
+            // File of extension / filename priorities for order.txt
   path d_prioFile = d_configFolder / "prio.txt";
 
-  vp d_ignoreForOrderPaths;
+            // (Relative) Paths to ignore, when generating order.txt
+  vp d_notInOrder;
+            // Extension / filename priorities for order.txt
+            // Filenames are prefixed by FILE_NAME_PREFIX to differentiate it
+            // from extensions (as some files might start with a '.')
   vs d_prios;
 
   public:
-    path const &getTemplateFolderPath() const;
-    vp const &getIgnoreForOrderPaths() const;
+    // Get the singleton instance of the Config object
     static Config &instance();
-    bool orderFilePriority(path const &p1, path const &p2) const;
+
+    // Get the path to the folder which contains the exercise template to copy
+    path const &getTemplateFolderPath() const;
+
+    // Get the files that should be excluded from the order.txt
+    vp const &getNotInOrder() const;
+    // Returns true if p1 has higher priority than p2 in the order.txt
+    bool higherPriority(path const &p1, path const &p2) const;
   private:
     Config();
+
+    // Read paths to ignore when generating order.txt
     vp getPathsToIgnoreForOrder() const;
+    // Set filename / extension priorities
     void setPrios();
+    // Create default priority file
     void createDefaultPrioFile() const;
+    // Return -1 if p1 has higher priority to p2 wrt to prioItem
+    //         1 if p2 has higher priority
+    //         0 if same priority
+    // By WRT:  If prioItem is a filename, the path with higher priority is that
+    //          with the same name. If same name, same prio.
+    //          If prioItem is an extension, the path with higher priority is
+    //          that with the extension that is the same as prioItem. If same
+    //          extension, same prio.
     int comparePrioWith(
       std::string const &prioItem, path const &p1, path const &p2
     ) const;
 
+    //  Whether the line (from the priority file) denotes a file, based on our
+    // convention.
     bool isFile(std::string const &prioFileLine) const;
+    // The filename of a line (from the priority file).
     std::string fileName(std::string const &prioFileLine) const;
 
 };
@@ -55,16 +82,14 @@ inline Config::path const &Config::getTemplateFolderPath() const
   return d_exerciseTemplateFolder;
 }
 
-inline Config::vp const &Config::getIgnoreForOrderPaths() const
+inline Config::vp const &Config::getNotInOrder() const
 {
-  return d_ignoreForOrderPaths;
+  return d_notInOrder;
 }
 
 inline bool Config::isFile(std::string const &prioFileLine) const
 {
-  if (prioFileLine.front() == FILE_NAME_PREFIX)
-    return true;
-  return false;
+  return prioFileLine.front() == FILE_NAME_PREFIX;
 }
 
 inline std::string Config::fileName(std::string const &prioFileLine) const

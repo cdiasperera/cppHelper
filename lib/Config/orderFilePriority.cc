@@ -1,6 +1,6 @@
 #include "Config.ih"
                   // Returns true iff p1 has higher prio than p2
-bool Config::orderFilePriority(path const &p1, path const &p2) const
+bool Config::higherPriority(path const &p1, path const &p2) const
 {
   int compRes;
   for (const auto &prioItem: d_prios)

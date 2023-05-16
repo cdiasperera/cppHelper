@@ -1,6 +1,7 @@
 #include "Config.ih"
 Config::Config()
-  : d_ignoreForOrderPaths{getPathsToIgnoreForOrder()}
+  : d_notInOrder{getPathsToIgnoreForOrder()}
 {
+  // TODO: Probably could do this in init. list
   setPrios();
 }

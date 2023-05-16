@@ -1,4 +1,5 @@
 #include "Config.ih"
+
 Config &Config::instance()
 {
   if (s_initd)

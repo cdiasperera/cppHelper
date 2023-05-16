@@ -19,7 +19,7 @@ GenOrder::FolderGroups GenOrder::reorderFilesToAdd(vp const &filesToAdd) const
       folderGroup.second.begin(), folderGroup.second.end(),
       [&](path const &p1, path const &p2)
       {
-        return d_config.orderFilePriority(p1, p2);
+        return d_config.higherPriority(p1, p2);
       }
     );
   }

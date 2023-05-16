@@ -1,18 +1,18 @@
 #include "Config.ih"
 
-// Returns -1 if p1 has higher priority than p2, with respect to prioItem
 int Config::comparePrioWith(
   string const &prioItem, path const &p1, path const &p2
 ) const
 {
   auto prioName = fileName(prioItem);
 
-                      // Same name so same priority
+                      // Same name (and therefore extension) so same priority
   if (p1.filename().string() == p2.filename().string())
     return 0;
 
                       // If prioItem is a file, check if p1,p2 have the same
-                      // name. If one does, it must have the higher priority
+                      // name. If one does, it must have the higher priority,
+                      // as the other must have a different name
   if (isFile(prioItem))
   {
     if (p1.filename().string() == prioName)
@@ -32,7 +32,7 @@ int Config::comparePrioWith(
   if (p2HasSameExt && not p1HasSameExt)
     return 1;
 
-  // Different file names, and both are totally different from the prioItem
+  // Different extensions for both, both are totally different from the prioItem
   return 0;
 
 

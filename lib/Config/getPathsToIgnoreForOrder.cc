@@ -1,7 +1,7 @@
 #include "Config.ih"
 vector<path> Config::getPathsToIgnoreForOrder() const
 {
-  ifstream ignoreFile{d_ignoreForOrderFile};
+  ifstream ignoreFile{d_ignoreLoc};
   vp pathsToIgnore;
 
   string line;

@@ -1,4 +1,5 @@
 #include "Config.ih"
+
 void Config::createDefaultPrioFile() const
 {
   ofstream prioFile{d_prioFile};
