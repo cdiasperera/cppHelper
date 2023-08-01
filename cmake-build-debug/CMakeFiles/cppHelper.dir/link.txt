@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/cppHelper.dir/main.cpp.o -o cppHelper 
