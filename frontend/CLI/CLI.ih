@@ -1,0 +1,7 @@
+#include "CLI.h"
+
+#include "../GenFolderParser/GenFolderParser.h"
+#include "../GenOrderParser/GenOrderParser.h"
+#include "../ZipCommandParser/ZipCommandParser.h"
+
+using namespace std;

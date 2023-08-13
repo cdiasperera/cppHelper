@@ -1,6 +1,0 @@
-#include "Config.h"
-
-#include <fstream>
-#include <iterator>
-using namespace std;
-using namespace filesystem;

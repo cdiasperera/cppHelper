@@ -1,169 +1,136 @@
 # CPP Helper
 
-## Features
+## (Planned) Features
 
-* A helper tool for the [C++ course by Frank Brokken and Jurjen Bokma](http://www.icce.rug.nl/edu/).
-* Provides the following features:
-  * Generate a folder structure for the weekly exercises in the course (`-g`).
-  * Create the `order.txt` required for submission (`-o`)
-  * Create the zip file that is to be submitted (`-z`)
-  * Create a class (inside a folder, with the header guards) (`-c`)
-  * Create a source file for a free (or member) function (`-s`)
-  * (Potentially) send the email containing the submissions (`-m`)
+Features with a checkmark are those that have been implemented.
+
+* [x] Generate Folder Structures for an exercise set.
+  * [x] Copy a template exercise folder for each exercise.
+    
+    `<set-no>` and `<ex-no>` strings  in any file are automatically replaced with the correct values.
+  * [ ] Arbitrary string can be replaced with arbitrary strings (specified with the CLI command).
+  * [x] Copy a `metadata.txt` file to the exercise set folder.
+  * [x] If the folder already exists, the command will do nothing and report that a folder already exists.
+* [x] Create the `order.txt` files automatically
+  * **Note that you will need to modify the `order.txt`in some cases, as Frank /
+    Jurjen / TAs expect a certain ordering of files / certain files not to be included**. 
+    We try our best to make the order.txt as nice as possible, but it won't be
+    perfect.
+  * [x] Exclude certain exercises from getting an `order.txt`.
+  * [x] Exclude folders / files (such as build folders / makefiles) automatically.
+  * [x] Preprocesses the order.txt to:
+    * Group files in the same folder (with groups separated by `\n\n`)
+    * Order groups based on extension / filename. 
+* [ ] Create and validate the zip file to be submitted
+  * [x] The zipped file is based on the `order.txt`s in the set we are zipping. If
+    you used `cppHelper -o ...` for this, it will zip the exercises that you
+    created an `order.txt` for.
+  * [x] Exclude folders / files (such as build folders / makefiles) automatically.
+  * [ ] If you wish to zip all exercises in a set, you must explicitly write `none` 
+    with regard to which exercises must be excluded. This is to prevent
+    accidentally sending all the exercises when resubmitting.
+* [ ] Create source files for free / member functions
+* [ ] Send the email containing the submission
 
 ## Installing
+1. Download the repo.
+2. Run `./INSTALL.sh`
 
-## Commands
+This script creates a build folder `.build/`, creates the executable `cppHelper`
+and moves it to `/usr/loca/bin`. 
 
-### Folder Generation (`-g`)
-* To generate the basic folder structure for an exercise, use the following 
-  command:
+If you wish to keep the executable in a different location, change the location
+in `./INSTALL.sh`. Just make sure that the location is in your `PATH`.
+## Using 
+* Generate folders:
   ```shell
-  # General Pattern
-  cppHelper -g [<locToGenTo>] <set> <exStart> <exEnd>
-  
-  # Example, set 1, exercises 1 to 8, to put into folder ./Exercises
-  cppHelper -g ./Exercises 1 1 8
+  cppHelper -g <pathToGenerateFolderAt> <setNo> <firstExNum> <LastExNum>
   ```
-  By default, the exercise folder that the folder is generated in is the
-  current directory.
-
-* By default, if the folder / file already exists, it will not be created /
-  overwritten.
-* If you have common files that you have in every exercise, this command can
-  copy these template files. To do this, put the file or folders you wish to
-  copy in `$HOME/.cpphelper/exercise/`. They will automatically be copied.
-* Make sure to fill out `$HOME/.cpphelper/metadata.txt` to create a
-  `metadata.txt` file as well.
-* The file that is placed at the top of every exercise (providing a summary for
-  it) is named `summary.txt`.
-* Sometimes these files might contain strings that are based on the set number
-  or the exercise number. Instead of the number put either of the following
-  strings:
-  * `<set-no>` which will be replaced with the set number that the files is
-    generated under.
-  * `<ex-no>` which will be replaced with the exercise number of the folder this
-    file will be copied to.
-* You can actually replace arbitrary strings with arbitrary strings. If you have
-  some string (say `toReplace`) in any file, then to replace that string in all
-  files with another string (say `replaceWith`), you can use the `-R` augment,
-  followed by the strings:
+  For example:
   ```shell
-  cppHelper -g -R toReplace replaceWith ./Exercises 1 1 8
+  cppHelper -g ./sets/ 2 9 15
   ```
-
-### `order.txt` Generation
-* To generate an `order.txt` for an exercise set, use the following command:
+  Would generate the following folder structure:
+  ```
+  -sets/
+    -set2/
+      -09/
+      -10/
+      -11/
+      -12/
+      -13/
+      -14/
+      -15/
+      -metadata.txt
+  ```
+* Generate Order files:
   ```shell
-  # General Pattern
-  cppHelper -o <setToGenerateFor> {<exerciseToExclude> <whitespace>}
-  
-  # Example, generate for set in folder "./set1", except for exercise 4 and 5
-  cppHelper -o ./set1 4 5
-  
-* **Note that you will need to modify the order of the files in the `order.txt`
-  in some cases, as Frank / Jurjen / TAs expect a certain ordering of files.**
-  We try our best to make the `order.txt` as nice as possible, but it won't be
-  perfect.
-  
-* Often enough, there will be folders / files you wish to automatically exclude
-  from the `order.txt`, such as build folders / files. To ignore these folders
-  / files, add them to `.cpphelpder/ignore.txt`.
-
-  For example, if every exercise (perhaps) contains a folder named
-  `cmake-build-debug/` or `CMakeLists.txt` that you never want to include,
-  you can add `cmake-build-debug/`  and `CMakeLists.txt` to the `ignore.txt`
-  file.
-  
-  Note, that the path names are relative from the exercise directory.
-* Lastly, you often want to order the files in the `order.txt` in a specific
-  order. For example, you often want the `.h` file for a class to be above the
-  `.cc` files for that class. Furthermore, you need a text file explaining the
-  exercise at the top of the `order.txt` (which we call `summary.txt`) 
-
-  It's a difficult task to do perfectly, and an ideal solution would involve
-  parsing a subset of C++ to determine which classes a file is associated with.
-
-  To reduce the amount of "fixing" you have to do on the generated `order.txt`,
-  we will do some basic ordering on file extensions / file names. This is
-  configurable in the `.cpphelper/prio.txt` file (which you can create). File
-  names / extensions that appear earlier in this file will be placed higher
-  in priority in the final `order.txt`. 
-
-  Each line contains a file name / extension. An extension must start with `.`
-  and a filename must be prepended with `$`.
-
-  This ordering is conducted per folder in the exercise, which each folder's
-  files being separated in the generated `order.txt`.
-
-  The default ordering is:
+  cppHelper -o <setToGenerateOrdersFor> <commaSeparatedExercisesToNotGenerateOrderTxtFor>
   ```
-  summary.txt
-  grammar
-  lexer
-  .h
-  .ih
-  .f
-  .hi
-  .cc
-  .cpp
-  ```
-
-### `.zip` Generation
-* To generate an `setN.zip` for an exercise set, use the following command:
+  
+  For example:
   ```shell
-  # General Pattern
-  cppHelper -z <setToGenerateFor> {<exerciseToExclude> <whitespace>}
-  
-  # Example, generate for set in folder ./set1, except for exercise 4 and 5
-  cppHelper -z ./set1 4 5
+  cpp -o ./sets/set2 9,11
   ```
   
-* Note that the files added to the zip are based on the `order.txt` files inside
-  each exercise folder. If no `order.txt` exists in a folder, that exercise will
-  not be added.
+  would generate order files for exercises 10,12-15 (for the set generated by
+  the command in the Generate Folder example)
 
-### Class Generation
+* Zip set:
+  ```shell
+  cppHelper -z <zipPath> <setToZipPath> <commaSeparatedExercisesToIncludeInZip>
+  ```
+  **Note that the directory that zipPath lies in must exist**
 
-### Source File Generation
+  For example:
+  ```shell
+  cppHelper -z . ./sets/set2 9 
+  ```
+  
+  would *try* to zip exercises 10-15 for the set / `order.txt`s generated by the
+  previous two commands. However, since ex11 doesn't have an `order.txt`, only
+  exercises 10,12-15 will be included in the zip.
 
-### Submitting via Email
+  A warning that exercise 11 does not have a `order.txt` will be shown.
 
+## Configuration
+* You can configure the program via `$HOME/.cpphelper/`.
+    * `$HOME/.cpphelper/template` is the template folder that should be copied into every exercise folder.
+    * `$HOME/.cpphelper/metadata.txt` is the metadata file that should be copied into every set folder.
+    * `$HOME/.cpphelper/ignore.txt` contains the paths to exclude from the order.txt.
+      These paths are relative to the exercise folder in the set.
+    * `$HOME/.cpphelper/prio.txt` orders each grouping in the generated `order.txt`.
+      File names / extensions that appear earlier in this file will be placed higher in priority in the final `order.txt`.
+      Each line contains a file name / extension. 
+      An extension must start with `.` and a filename must be prepended with `$`.
+      After running `.cppHeler -o` for the first time, if a `prio.txt` is not present, one will be created.
 
-## Development
-
-### Design
-* `Config` is a singleton that gets initialized at the start of the program. It
-  contains the information gathered out of parsing the `$HOME/.cpphelper/`
-  directory.
-* `ArgParser` is a bisonc++ parser that breaks up a command into its components
-  (it also uses `ArgScanner` which is a flexc++ lexer:
-  * Command
-  * Flags
-  * Arguments
-* The commands are implemented via the Command pattern.
-* The main program runs `ArgParser` and creates a POD called `CommandRecipe`.
-  Then, Command builds itself based on `CommandRecipe`. From this, we run its
-  `execute` member, executing the command.
-* For tests, each class being tested has it's own xxxTest folder. The fixture
-  for that test has it's own .h and .ih file, and is otherwise a normal class.
-  The actual GoogleTest code is inside a test.cc file in that folder.
-
+## Contribution
+* If you would like to contribute, you can either:
+  * Add an issue via the Github issues.
+  * Fix an issue and submit a PR to the `dev` branch.
+  * Document the design in `/docs/design`.
+  * Document the code.
+  * Perform QA.
+  
 ### Compiling
-* We compile the project with CMake.
-* To update parser, you can use the `remakeparser.sh` script as follows:
-  `remakeparser.sh <parser-name>`. Note then, that the parser folder should 
-  then be `<parser-name>Parser` and the scanner folder should be
-  `<parser-name>Scanner`.
+1. Create a build folder (e.g: `.build/`)
+2. Execute: `cmake ../ -DCMAKE_BUILD_TYPE=Debug`
+3. Execute: `make`
+
+Naturally with CMake you can use different build tools (e.g: `ninja`). So you
+can tinker with these steps as you wish, if you know what you are doing.
 
 ### TODO
-* Error reporting on parser(s)
-* Verbose flag for all commands
-* Write parser for `replace.txt`
-* Write Command
-* Write GenFolder Command
-* Write GenZip Command 
-* Write GenClass Command
-* Write GenMember Command
-* Write GenMember Command
-* Write install script
+- Handle no metadata / template folder case (just create empty files) at the start of execution.
+- Zip shouldn't rely on the system utility `zip` as it does now.
+- Handle frontend parsing failures gracefully.
+- Make install script for Windows.
+
+## FAQ
+1. What is `$HOME`?
+    * It is the environment variable with the name `HOME`. On a linux machine,
+    `cd ~` should send you to this directory. 
+2. Will this work on Windows?
+    * The only platform specific function is the zipping function (which hopefully will be made platform independent).
+    * You should in principle be able to write and run a version of INSTALL.sh that uses windows commands instead.

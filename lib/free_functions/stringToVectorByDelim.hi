@@ -1,0 +1,18 @@
+template <typename T>
+std::vector<T>stringToVectorByDelim
+(
+  std::string str, char delim, T from_string(std::string const &)
+)
+{
+  std::stringstream ss{str};
+  std::vector<T> result;
+
+  while(ss.good())
+  {
+    std::string substr;
+    getline(ss, substr, delim);
+    result.push_back(from_string(substr));
+  }
+
+  return result;
+}

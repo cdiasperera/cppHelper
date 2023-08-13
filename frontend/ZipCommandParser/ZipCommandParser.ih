@@ -1,0 +1,6 @@
+#include "ZipCommandParser.h"
+
+#include "../../lib/free_functions/free_functions.h"
+#include "../../lib/LinuxZip/LinuxZip.h"
+
+using namespace std;

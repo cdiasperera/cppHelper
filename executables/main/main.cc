@@ -1,12 +1,11 @@
 #include "main.ih"
 
-// The actual program that will run, during prod
+#include "../../controller/GenOrder/GenOrder.h"
+
 int main(int argc, char *argv[])
-try
 {
-  ArgParser(argc, vector<string>{argv, argv + argc});
-}
-catch (...)
-{
-  handleExceptions();
+  vector<string> args{argv, argv + argc};
+
+  auto cmd = CLI{}.readCommand(args.size(), args);
+  cmd->execute();
 }

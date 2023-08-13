@@ -1,0 +1,9 @@
+#include "ZipCommand.h"
+
+#include "../../lib/free_functions/free_functions.h"
+
+#include <fstream>
+#include <iostream>
+#include <iterator>
+
+using namespace std;

@@ -16,4 +16,4 @@ cd $Parser
 bisonc++ grammar
 cd ../$Scanner
 flexc++ lexer
-cd ..
+cd ..

@@ -1,0 +1,7 @@
+template <typename T>
+bool contains(std::vector<T> vec, T elem)
+{
+  if (find(vec.begin(), vec.end(), elem) != vec.end())
+    return true;
+  return false;
+}

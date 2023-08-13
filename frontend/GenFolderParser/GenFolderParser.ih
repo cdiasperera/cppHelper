@@ -1,0 +1,4 @@
+#include "GenFolderParser.h"
+
+using namespace std;
+using namespace filesystem;
