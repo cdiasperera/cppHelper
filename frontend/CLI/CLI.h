@@ -1,6 +1,7 @@
 #ifndef CLI_h_1691573566
 #define CLI_h_1691573566
 
+#include "../Frontend/Frontend.h"
 #include "../../controller/Command/Command.h"
 #include "../CLIParser/CLIParser.h"
 #include "../FrontendException/FrontendException.h"
@@ -10,7 +11,7 @@
 #include <memory>
 #include <unordered_map>
 
-class CLI
+class CLI : public Frontend
 {
   using CmdParserMap = std::unordered_map
   <
@@ -26,11 +27,12 @@ class CLI
 
   public:
     CLI();
+    ~CLI() = default;
 
     std::unique_ptr<Command> readCommand
     (
       size_t argc, std::vector<std::string> argv
-    );
+    ) override;
 
   private:
     void handleException(std::exception const &exception) const;
