@@ -41,7 +41,7 @@ and moves it to `/usr/loca/bin`.
 
 If you wish to keep the executable in a different location, change the location
 in `./INSTALL.sh`. Just make sure that the location is in your `PATH`.
-## Using 
+## Usage 
 * Generate folders:
   ```shell
   cppHelper -g <pathToGenerateFolderAt> <setNo> <firstExNum> <LastExNum>
@@ -124,7 +124,6 @@ can tinker with these steps as you wish, if you know what you are doing.
 ### TODO
 - Handle no metadata / template folder case (just create empty files) at the start of execution.
 - Zip shouldn't rely on the system utility `zip` as it does now.
-- Handle frontend parsing failures gracefully.
 - Make install script for Windows.
 
 ## FAQ

@@ -1,6 +1,9 @@
 #include "../../frontend/CLI/CLI.h"
 
 #include <filesystem>
+#include <exception>
+
+int handleExceptions();
 
 using namespace std;
 using namespace filesystem;

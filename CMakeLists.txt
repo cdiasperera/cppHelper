@@ -31,7 +31,7 @@ FILE(GLOB COMMON_SOURCES
 
 # Exec source
 FILE(GLOB EXEC_SOURCE
-        executables/main/main.cc
+        executables/main/*.cc
         )
 
 # Test sources
