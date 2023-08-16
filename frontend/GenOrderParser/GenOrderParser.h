@@ -3,7 +3,7 @@
 
 #include "../CLIParser/CLIParser.h"
 #include "../../controller/GenOrder/GenOrder.h"
-#include "../../controller/Config/Config.h"
+#include "../../model/Config/Config.h"
 
 class GenOrderParser : public CLIParser
 {

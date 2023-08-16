@@ -26,6 +26,7 @@ set(CMAKE_CXX_FLAGS "-g -Wall")
 FILE(GLOB COMMON_SOURCES
         lib/**/*.cc
         frontend/**/*.cc
+        model/**/*.cc
         controller/**/*.cc
         )
 

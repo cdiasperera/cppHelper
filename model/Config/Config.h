@@ -47,6 +47,10 @@ class Config
   private:
     // Read paths to ignore when generating order.txt
     vp initPathsToIgnoreForOrder() const;
+
+    void createDefaultMetadataFile() const;
+    void createDefaultIgnoreFile() const;
+    void createDefaultTemplateExercise() const;
 };
 inline Config::path const &Config::getTemplateFolderPath() const
 {

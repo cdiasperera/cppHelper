@@ -3,7 +3,7 @@
 
 #include "../Command/Command.h"
 
-#include "../Config/Config.h"
+#include "../../model/Config/Config.h"
 #include "../Exercises/Exercises.h"
 
 #include <unordered_map>

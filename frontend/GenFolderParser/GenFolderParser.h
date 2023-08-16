@@ -3,7 +3,7 @@
 
 #include "../CLIParser/CLIParser.h"
 #include "../../controller/GenFolder/GenFolder.h"
-#include "../../controller/Config/Config.h"
+#include "../../model/Config/Config.h"
 
 class GenFolderParser : public CLIParser
 {

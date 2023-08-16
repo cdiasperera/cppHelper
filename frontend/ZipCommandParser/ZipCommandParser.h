@@ -3,7 +3,7 @@
 
 #include "../CLIParser/CLIParser.h"
 #include "../../controller/ZipCommand/ZipCommand.h"
-#include "../../controller/Config/Config.h"
+#include "../../model/Config/Config.h"
 
 class ZipCommandParser : public CLIParser
 {

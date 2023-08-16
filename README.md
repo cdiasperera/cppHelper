@@ -122,7 +122,6 @@ Naturally with CMake you can use different build tools (e.g: `ninja`). So you
 can tinker with these steps as you wish, if you know what you are doing.
 
 ### TODO
-- Handle no metadata / template folder case (just create empty files) at the start of execution.
 - Zip shouldn't rely on the system utility `zip` as it does now.
 - Make install script for Windows.
 
