@@ -4,4 +4,6 @@
 #include "../GenOrderParser/GenOrderParser.h"
 #include "../ZipCommandParser/ZipCommandParser.h"
 
+#include <iostream>
+
 using namespace std;

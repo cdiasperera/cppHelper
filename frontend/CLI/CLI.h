@@ -3,6 +3,7 @@
 
 #include "../../controller/Command/Command.h"
 #include "../CLIParser/CLIParser.h"
+#include "../FrontendException/FrontendException.h"
 
 #include <vector>
 #include <string>
@@ -30,6 +31,10 @@ class CLI
     (
       size_t argc, std::vector<std::string> argv
     );
+
+  private:
+    void handleException(std::exception const &exception) const;
+    std::string usage() const;
 };
 
 #endif
