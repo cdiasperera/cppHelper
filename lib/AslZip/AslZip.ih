@@ -1,0 +1,6 @@
+#include "AslZip.h"
+
+#include <asl/ZipFile.h>
+
+using namespace std;
+using namespace asl;

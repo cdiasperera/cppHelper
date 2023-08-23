@@ -6,17 +6,6 @@ project(
         LANGUAGES CXX
 )
 
-#
-
-# Add the google test subdirectory
-add_subdirectory(extern/googletest)
-
-# googletest
-include_directories(extern/googletest/googletest/include)
-
-# googlemock
-include_directories(extern/googletest/googlemock/include)
-
 # Compiler flags
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_FLAGS "-g -Wall")
@@ -40,16 +29,15 @@ FILE(GLOB TEST_SOURCE
         executables/test/**/*.cc
         )
 
+# ASL Zip
+include(FetchContent)
+FetchContent_Declare(asl URL https://github.com/aslze/asl/archive/1.11.8.zip)
+FetchContent_MakeAvailable(asl)
+
+include_directories(extern/aslzip/include)
+add_subdirectory(extern/aslzip/src)
+
 # Prod Exec
 add_executable(cppHelper ${COMMON_SOURCES} ${EXEC_SOURCE})
 
-# Test execs
-#add_executable(cppHelperTest ${COMMON_SOURCES} ${TEST_SOURCE})
-
-#target_link_libraries(
-#        cppHelperTest
-#        gtest gtest_main
-#)
-
-#include(GoogleTest)
-#gtest_discover_tests(cppHelperTest)
+target_link_libraries(cppHelper asls aslzip)

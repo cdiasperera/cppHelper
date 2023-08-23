@@ -12,7 +12,7 @@ void ZipCommand::execute()
     addPathsFromExercise(setLoc, exPath, toZip);
   }
 
-  string zipName = setLoc.filename().string() + ".zip";
+  string zipName = setLoc.parent_path().filename().string() + ".zip";
   path zipPath = d_zipLoc/zipName;
 
   remove(zipPath);

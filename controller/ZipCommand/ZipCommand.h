@@ -3,7 +3,7 @@
 
 #include "../Command/Command.h"
 #include "../Exercises/Exercises.h"
-#include "../../lib/LinuxZip/LinuxZip.h"
+#include "../../lib/AslZip/AslZip.h"
 
 class ZipCommand : public Command
 {
@@ -13,7 +13,7 @@ class ZipCommand : public Command
   path d_zipLoc;
 
   Exercises d_exercises;
-  LinuxZip d_zipper;
+  AslZip d_zipper;
   public:
     ZipCommand
     (

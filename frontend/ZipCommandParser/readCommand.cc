@@ -5,7 +5,9 @@ unique_ptr<Command> ZipCommandParser::readCommand
   size_t argc, vector<string> const &argv
 )
 {
-  vector<size_t> exsToIgnore = stringToVectorByDelim<size_t>
+  vector<size_t> exsToIgnore;
+  if (argv.size() > EXSTOIGNORE_LOC && argv[EXSTOIGNORE_LOC] != "none")
+    exsToIgnore = stringToVectorByDelim<size_t>
     (
       argv[EXSTOIGNORE_LOC],
       ',',

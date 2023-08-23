@@ -5,13 +5,15 @@ unique_ptr<Command> GenOrderParser::readCommand
   size_t argc, vector<string> const &argv
 )
 {
-  vector<size_t> exsToIgnore = stringToVectorByDelim<size_t>
-  (
-    argv[EXSTOIGNORE_LOC],
-    ',',
-    [](string const &str) {return stoul(str);}
-  );
+  vector<size_t> exsToIgnore;
 
+  if (argv.size() > EXSTOIGNORE_LOC)
+    exsToIgnore = stringToVectorByDelim<size_t>
+    (
+      argv[EXSTOIGNORE_LOC],
+      ',',
+      [](string const &str) {return stoul(str);}
+    );
 
   auto prio = [](path const &p1, path const &p2)
   {

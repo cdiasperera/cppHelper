@@ -32,6 +32,9 @@ Features with a checkmark are those that have been implemented.
 * [ ] Create source files for free / member functions
 * [ ] Send the email containing the submission
 
+## Prequisites
+* To install: `cmake`
+
 ## Installing
 1. Download the repo.
 2. Run `./INSTALL.sh`
@@ -41,6 +44,7 @@ and moves it to `/usr/loca/bin`.
 
 If you wish to keep the executable in a different location, change the location
 in `./INSTALL.sh`. Just make sure that the location is in your `PATH`.
+
 ## Usage 
 * Generate folders:
   ```shell
@@ -65,7 +69,7 @@ in `./INSTALL.sh`. Just make sure that the location is in your `PATH`.
   ```
 * Generate Order files:
   ```shell
-  cppHelper -o <setToGenerateOrdersFor> <commaSeparatedExercisesToNotGenerateOrderTxtFor>
+  cppHelper -o <setToGenerateOrdersFor> [<commaSeparatedExercisesToNotGenerateOrderTxtFor>]
   ```
   
   For example:
@@ -78,7 +82,7 @@ in `./INSTALL.sh`. Just make sure that the location is in your `PATH`.
 
 * Zip set:
   ```shell
-  cppHelper -z <zipPath> <setToZipPath> <commaSeparatedExercisesToIncludeInZip>
+  cppHelper -z <zipPath> <setToZipPath> (<commaSeparatedExercisesToIncludeInZip> | none)
   ```
   **Note that the directory that zipPath lies in must exist**
 
@@ -122,7 +126,6 @@ Naturally with CMake you can use different build tools (e.g: `ninja`). So you
 can tinker with these steps as you wish, if you know what you are doing.
 
 ### TODO
-- Zip shouldn't rely on the system utility `zip` as it does now.
 - Make install script for Windows.
 
 ## FAQ
